@@ -9,7 +9,7 @@ if __name__ == '__main__':
         description=f"copies all files to the system according to {util.LOCATIONS_PATH}",
         epilog=f'''
 examples:
-{sys.argv[0]} --only vimrc .vim/plugin.conf
+{sys.argv[0]} --only vimrc plugin.conf
 {sys.argv[0]} --all
         ''',
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -29,5 +29,5 @@ examples:
     loc_dic = util.get_locations_dictionary('locations.txt')
     for conf in loc_dic.keys():
         if filtered and conf not in filtered: continue
-        os.system(f'cp -v {loc_dic[conf]} {conf}')
+        os.system(f'cp -v {conf} {loc_dic[conf]}')
 

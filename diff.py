@@ -11,7 +11,7 @@ if __name__ == '__main__':
 according to {util.LOCATIONS_PATH}",
         epilog=f'''
 examples:
-{sys.argv[0]} --only vimrc .vim/plugin.conf
+{sys.argv[0]} --only vimrc plugin.conf
 {sys.argv[0]} --all
         ''',
         formatter_class=argparse.RawDescriptionHelpFormatter,
