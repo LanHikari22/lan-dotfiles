@@ -1,0 +1,3 @@
+// specifies where to place each conf file and is used by push.py and pull.py
+vimrc: ~/.vimrc
+coc-settings.json: ~/.vim/coc-settings.json
