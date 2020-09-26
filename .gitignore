@@ -1,2 +1,5 @@
 # python files
 __pycache__
+
+# rope using coc
+.vim

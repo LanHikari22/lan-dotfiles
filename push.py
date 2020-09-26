@@ -26,8 +26,8 @@ examples:
     if not args.all and args.only:
         filtered = args.only
 
-    loc_dic = util.get_locations_dictionary('locations.txt')
-    for conf in loc_dic.keys():
+    to_path = util.get_locations_dictionary(util.LOCATIONS_PATH)
+    for conf in to_path.keys():
         if filtered and conf not in filtered: continue
-        os.system(f'cp -v {conf} {loc_dic[conf]}')
+        os.system(f'cp -v {conf} {to_path[conf]}')
 
