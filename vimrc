@@ -12,6 +12,7 @@ Plug 'altercation/vim-colors-solarized'
 "" Editing
 Plug 'jiangmiao/auto-pairs'
 Plug 'preservim/nerdcommenter'											" see config below
+Plug 'yggdroot/indentLine'
  
 "" Navigation
 Plug 'preservim/nerdtree' 													" see config below
