@@ -2,7 +2,10 @@
 " personal vim configuration to upload to new machines
 
 call plug#begin()
-" Download vim.plug to ~/.vim/autoload from github.com/junegunn/vim-plug
+" Download vim.plug to ~/.vim/autoload from github.com/junegunn/vim-plug:
+" curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+"      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 " run :PlugInstall to install plugins. 
 
 "" Themes
