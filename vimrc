@@ -4,6 +4,7 @@
 call plug#begin()
 " Download vim.plug to ~/.vim/autoload from github.com/junegunn/vim-plug
 " run :PlugInstall to install plugins. 
+
 "" Themes
 Plug 'morhetz/gruvbox'
 Plug 'drewtempelmeyer/palenight.vim'
@@ -23,6 +24,10 @@ Plug 'junegunn/fzf.vim'															" see config below
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-fugitive'
 Plug 'wincent/terminus'
+
+"" Etc
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-obsession'
 
 "" Intellisence & Autocomplete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}     " see config below
