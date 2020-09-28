@@ -3,3 +3,6 @@ __pycache__
 
 # rope using coc
 .vim
+
+# vim backups
+*.swp
