@@ -21,7 +21,9 @@ Plug 'yggdroot/indentLine'
 "" Navigation
 Plug 'preservim/nerdtree' 													" see config below
 Plug 'preservim/tagbar'															
+Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
 Plug 'junegunn/fzf.vim'															" see config below
+Plug 'antoinemadec/coc-fzf'                         " see config below
 
 "" UI
 Plug 'vim-airline/vim-airline'
@@ -58,6 +60,9 @@ let g:NERDSpaceDelims = 1
 nmap !f :Files<cr>
 nmap !g :Rg<cr>
 nmap !t :Tags<cr>
+
+" Plug 'antoinemadec/coc-fzf'
+nmap !o :CocFzfList outline<cr>
 
 
 "" Plug 'neoclide/coc.nvim'
