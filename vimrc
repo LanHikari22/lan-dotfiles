@@ -184,7 +184,7 @@ set background=dark
 set t_Co=256
 
 set nu rnu
-set hlsearch
+" set hlsearch
 
 filetype plugin on
 syntax on
