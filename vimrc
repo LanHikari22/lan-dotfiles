@@ -30,7 +30,9 @@ Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-fugitive'
 Plug 'wincent/terminus'
 
-"" Etc
+"" Etcnnmap <silent> <C-p> <C-i>
+map <silent> <C-p> <C-i>
+
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-obsession'
 
@@ -66,6 +68,9 @@ nmap !o :CocFzfList outline<cr>
 
 
 "" Plug 'neoclide/coc.nvim'
+" remap <C-i> which is taken by tab for completion
+nnoremap <C-p> <C-i>
+"
 " if hidden is not set, TextEdit might fail.
 set hidden
 " Better display for messages
