@@ -2,3 +2,4 @@
 vimrc: ~/.vimrc
 coc-settings.json: ~/.vim/coc-settings.json
 tmux.conf: ~/.tmux.conf
+elinks.conf: ~/.elinks/elinks.conf
