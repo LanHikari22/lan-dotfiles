@@ -6,3 +6,4 @@ coc-settings.json: ~/.vim/coc-settings.json
 
 tmux.conf: ~/.tmux.conf
 kitty.conf: ~/.config/kitty/kitty.conf
+elinks.conf: ~/.elinks/elinks.conf
