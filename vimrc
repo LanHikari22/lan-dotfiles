@@ -183,6 +183,10 @@ call plug#end()
 " write permision-protected file
 nmap ,ws	:w !sudo tee % > /dev/null
 
+" map scrolling
+map <silent> <C-j> <C-e>
+map <silent> <C-k> <C-y>
+
 colo gruvbox
 let g:gruvbox_contrast_dark="hard"
 set background=dark
