@@ -65,6 +65,7 @@ nmap !t :Tags<cr>
 
 " Plug 'antoinemadec/coc-fzf'
 nmap !o :CocFzfList outline<cr>
+nmap !d :CocFzfList diagnostics<cr>
 
 
 "" Plug 'neoclide/coc.nvim'
@@ -182,6 +183,10 @@ call plug#end()
 
 " write permision-protected file
 nmap ,ws	:w !sudo tee % > /dev/null
+
+" tabstop set to 2 or 4
+nmap ,ts2 :set tabstop=2<cr>
+nmap ,ts4 :set tabstop=4<cr>
 
 " map scrolling
 map <silent> <C-j> <C-e>
