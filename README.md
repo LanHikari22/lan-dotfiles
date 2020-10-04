@@ -1,7 +1,7 @@
 # lan-dotfiles
 Personal repository for configuration files including vim and tmux.
 
-## Install
+## Example Install
 ```
 git clone https://github.com/LanHikari22/lan-dotfiles.git ~/src/lan-dotfiles
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
