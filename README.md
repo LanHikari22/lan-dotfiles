@@ -1,4 +1,4 @@
-![Logos-Screenie](https://cdn.discordapp.com/attachments/690366794346528838/762456548877402122/unknown.png)
+![Logos-Screenie](https://cdn.discordapp.com/attachments/690366794346528838/762464651891441664/unknown.png)
 
 # lan-dotfiles
 Personal repository for configuration files including vim and tmux.
