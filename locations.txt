@@ -2,7 +2,13 @@
 
 // vim
 vimrc: ~/.vimrc
-coc-settings.json: ~/.vim/coc-settings.json
+vim/coc-settings.json: ~/.vim/coc-settings.json
+
+// shell
+shellrc: ~/.shellrc
+shell/emojis.sh: ~/.config/shell/emojis.sh
+shell/display.sh: ~/.config/shell/display.sh
+shell/fzf.sh: ~/.config/shell/fzf.sh
 
 tmux.conf: ~/.tmux.conf
 kitty.conf: ~/.config/kitty/kitty.conf

@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# ---  configuration ----------------------------------------
+function source_if_found() { [ -e "$1" ] && source "$1" }
+source_if_found ~/.config/shell/secret.sh
+source_if_found ~/.config/shell/emojis.sh
+source_if_found ~/.config/shell/display.sh
+source_if_found ~/.config/shell/fzf.sh
+
+# --- Aliases -----------------------------------------------
+alias diff="diff -Naur --color=always"
+alias spring-run='mvn package && java -jar target/*.jar'
+alias tma='tmux attach -t base || tmux new -t base'
+alias vi='/usr/bin/vim'
+alias ipext='curl ipinfo.io/ip'
+
+# --- Functions ---------------------------------------------
+# type: (regex) -> pid[]
+function get-pid() { echo $(ps -aux | grep "$1" | tr -s ' ' | cut -d ' ' -f2); }
+

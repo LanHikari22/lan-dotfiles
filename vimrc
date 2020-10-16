@@ -203,8 +203,6 @@ set nu rnu
 filetype plugin on
 syntax on
 
-set clipboard=unnamedplus
-
 set foldmethod=indent
 set nofoldenable
 
