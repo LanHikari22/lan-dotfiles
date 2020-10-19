@@ -17,6 +17,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'jiangmiao/auto-pairs'
 Plug 'preservim/nerdcommenter'											" see config below
 Plug 'yggdroot/indentLine'
+Plug 'svermeulen/vim-macrobatics'                   " see config below 
  
 "" Navigation
 Plug 'preservim/nerdtree' 													" see config below
@@ -39,7 +40,10 @@ Plug 'tpope/vim-obsession'
 "" Intellisence & Autocomplete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}     " see config below
 
+"
 " plugin config
+"
+
 "" Plug 'preservim/nerdtree'
 nmap !n :NERDTreeToggle<cr>
 autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
@@ -57,6 +61,29 @@ endfunction
 nmap <C-_>	<Plug>NERDCommenterToggle
 vmap <C-_>	<Plug>NERDCommenterToggle<CR>gv
 let g:NERDSpaceDelims = 1
+
+"" Plug 'svermeulen/vim-macrobatics'
+" Use <nowait> to override the default bindings which wait for another key press
+nmap <nowait> <leader>q <plug>(Mac_Play)
+nmap <nowait> <leader>qr <plug>(Mac_RecordNew)
+
+nmap <leader>mh :DisplayMacroHistory<cr>
+
+nmap [m <plug>(Mac_RotateBack)
+nmap ]m <plug>(Mac_RotateForward)
+
+nmap <leader>ma <plug>(Mac_Append)
+nmap <leader>mp <plug>(Mac_Prepend)
+
+nmap <leader>mng <plug>(Mac_NameCurrentMacro)
+nmap <leader>mnf <plug>(Mac_NameCurrentMacroForFileType)
+nmap <leader>mns <plug>(Mac_NameCurrentMacroForCurrentSession)
+
+nmap <leader>mo <plug>(Mac_SearchForNamedMacroAndOverwrite)
+nmap <leader>mr <plug>(Mac_SearchForNamedMacroAndRename)
+nmap <leader>md <plug>(Mac_SearchForNamedMacroAndDelete)
+nmap <leader>me <plug>(Mac_SearchForNamedMacroAndPlay)
+nmap <leader>ms <plug>(Mac_SearchForNamedMacroAndSelect)
 
 "" Plug 'junegunn/fzf.vim'
 nmap !f :Files<cr>
@@ -180,6 +207,9 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 call plug#end()
 
+"
+" other configs
+"
 
 " write permision-protected file
 nmap ,ws	:w !sudo tee % > /dev/null
@@ -198,7 +228,6 @@ set background=dark
 set t_Co=256
 
 set nu rnu
-" set hlsearch
 
 filetype plugin on
 syntax on
