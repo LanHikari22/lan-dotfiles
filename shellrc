@@ -9,6 +9,7 @@ source_if_found ~/.config/shell/fzf.sh
 
 # --- Aliases -----------------------------------------------
 alias diff="diff -Naur --color=always"
+alias lsd="ls -d */"
 alias spring-run='mvn package && java -jar target/*.jar'
 alias tma='tmux attach -t base || tmux new -t base'
 alias vi='/usr/bin/vim'
@@ -17,4 +18,4 @@ alias ipext='curl ipinfo.io/ip'
 # --- Functions ---------------------------------------------
 # type: (regex) -> pid[]
 function get-pid() { echo $(ps -aux | grep "$1" | tr -s ' ' | cut -d ' ' -f2); }
-
+function rgless() { rg --color=always "$1" | less -R; }

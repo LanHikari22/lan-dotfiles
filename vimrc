@@ -18,6 +18,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'preservim/nerdcommenter'											" see config below
 Plug 'yggdroot/indentLine'
 Plug 'svermeulen/vim-macrobatics'                   " see config below 
+Plug 'chrisbra/Recover.vim'
  
 "" Navigation
 Plug 'preservim/nerdtree' 													" see config below
@@ -25,14 +26,12 @@ Plug 'preservim/tagbar'
 Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
 Plug 'junegunn/fzf.vim'															" see config below
 Plug 'antoinemadec/coc-fzf'                         " see config below
+Plug 'kshenoy/vim-signature'
 
 "" UI
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-fugitive'
 Plug 'wincent/terminus'
-
-"" Etcnnmap <silent> <C-p> <C-i>
-map <silent> <C-p> <C-i>
 
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-obsession'
@@ -221,6 +220,9 @@ nmap ,ts4 :set tabstop=4<cr>
 " map scrolling
 map <silent> <C-j> <C-e>
 map <silent> <C-k> <C-y>
+
+"" Etcnnmap <silent> <C-p> <C-i>
+map <silent> <C-p> <C-i>
 
 colo gruvbox
 let g:gruvbox_contrast_dark="hard"
