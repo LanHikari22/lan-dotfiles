@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# fdr - cd to selected directory from specified directory
+# fd - cd to selected directory from specified directory
 fd() {
   local dir
   local init_dir
@@ -11,7 +11,7 @@ fd() {
   [ $? != 0 ] && cd $init_dir
 }
 
-# fdra - including hidden directories
+# fda - including hidden directories
 fda() {
   local dir
   local init_dr

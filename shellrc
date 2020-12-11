@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ---  configuration ----------------------------------------
-function source_if_found() { [ -e "$1" ] && source "$1" }
+function source_if_found() { [ -e "$1" ] && source "$1"; }
 source_if_found ~/.config/shell/secret.sh
 source_if_found ~/.config/shell/emojis.sh
 source_if_found ~/.config/shell/display.sh

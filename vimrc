@@ -87,7 +87,20 @@ nmap <leader>ms <plug>(Mac_SearchForNamedMacroAndSelect)
 "" Plug 'junegunn/fzf.vim'
 nmap !f :Files<cr>
 nmap !g :Rg<cr>
+nmap #g :call RgSymbol()<cr>
 nmap !t :Tags<cr>
+
+function RgSymbol()
+  let save_cb = &cb
+  let regInfo = getreginfo('"')
+  try
+    " norm! y{motion}
+    norm! yiw:Rg "
+  finally
+    let &cb = save_cb
+    call setreg('"', regInfo)
+  endtry
+endfunction
 
 " Plug 'antoinemadec/coc-fzf'
 nmap !o :CocFzfList outline<cr>
@@ -243,3 +256,4 @@ set shiftwidth=0
 set expandtab
 set autoindent
 
+source ~/.vim/local.vim

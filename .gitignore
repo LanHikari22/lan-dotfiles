@@ -6,3 +6,6 @@ __pycache__
 
 # vim backups
 *.swp
+
+# temporary notes
+.commit
