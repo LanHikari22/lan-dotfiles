@@ -8,23 +8,28 @@ call plug#begin()
 
 " run :PlugInstall to install plugins. 
 
+""""""""""""""""""""""""""""""
+" plugin List
+""""""""""""""""""""""""""""""
+
 "" Themes
 Plug 'morhetz/gruvbox'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'altercation/vim-colors-solarized'
 
 "" Editing
-Plug 'jiangmiao/auto-pairs'
-Plug 'preservim/nerdcommenter'											" see config below
+Plug 'jiangmiao/auto-pairs'                         " see config below
+Plug 'preservim/nerdcommenter'                      " see config below
 Plug 'yggdroot/indentLine'
 Plug 'svermeulen/vim-macrobatics'                   " see config below 
 Plug 'chrisbra/Recover.vim'
  
 "" Navigation
-Plug 'preservim/nerdtree' 													" see config below
-Plug 'preservim/tagbar'															
+Plug 'preservim/nerdtree'                           " see config below
+Plug 'preservim/tagbar'                              
+Plug 'liuchengxu/vista.vim'                         " see config below
 Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
-Plug 'junegunn/fzf.vim'															" see config below
+Plug 'junegunn/fzf.vim'                              " see config below
 Plug 'antoinemadec/coc-fzf'                         " see config below
 Plug 'kshenoy/vim-signature'
 
@@ -32,6 +37,8 @@ Plug 'kshenoy/vim-signature'
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-fugitive'
 Plug 'wincent/terminus'
+Plug 'jacquesbh/vim-showmarks'
+
 
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-obsession'
@@ -39,27 +46,67 @@ Plug 'tpope/vim-obsession'
 "" Intellisence & Autocomplete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}     " see config below
 
-"
+""""""""""""""""""""""""""""""
 " plugin config
-"
+""""""""""""""""""""""""""""""
+
+Plug 'jiangmiao/auto-pairs'
+let g:AutoPairsShortcutFastWrap='<C-e>'   " turns (|)token into (token)|, can repeat consume
 
 "" Plug 'preservim/nerdtree'
 nmap !n :NERDTreeToggle<cr>
 autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 function s:CloseIfOnlyNerdTreeLeft()
-	if exists("t:NERDTreeBufName")
-		if bufwinnr(t:NERDTreeBufName) != -1
-			if winnr("$") == 1
-				q
-			endif
-		endif
-	endif
+  if exists("t:NERDTreeBufName")
+    if bufwinnr(t:NERDTreeBufName) != -1
+      if winnr("$") == 1
+        q
+      endif
+    endif
+  endif
 endfunction
 
 "" Plug 'preservim/nerdcommenter'
-nmap <C-_>	<Plug>NERDCommenterToggle
-vmap <C-_>	<Plug>NERDCommenterToggle<CR>gv
+nmap <C-_>  <Plug>NERDCommenterToggle
+vmap <C-_>  <Plug>NERDCommenterToggle<CR>gv
 let g:NERDSpaceDelims = 1
+
+"" Plug 'liuchengxu/vista.vim'
+nmap !b :TagbarToggle<CR>
+let s:vista_toggled = 0
+let g:vista#renderer#ctags = "line"
+" let g:vista_sidebar_position = "vertical topleft"
+nmap !v :call ToggleVistaShow()<CR>   " TODO: errors out someitmes on Vista coc
+nmap #v :call ToggleVistaExec()<CR>
+
+function ToggleVistaShow()
+  if s:vista_toggled == 1
+    :Vista!!
+  else
+    :Vista show
+  endif
+
+  let s:vista_toggled = !s:vista_toggled
+endfunction
+
+function ToggleVistaExec()
+  if g:vista_default_executive == 'coc'
+    let g:vista_default_executive = 'ctags'
+  else
+    let g:vista_default_executive = 'coc'
+  endif
+  echo 'toggled Vista exec to ' .  g:vista_default_executive 
+endfunction
+
+autocmd WinEnter * call s:CloseIfOnlyVistaLeft()
+function s:CloseIfOnlyVistaLeft()
+  echo "beep"
+    if bufwinnr("__vista__") != -1 " found through :echo bufname()
+      if winnr("$") == 1
+        q
+      endif
+  endif
+endfunction
 
 "" Plug 'svermeulen/vim-macrobatics'
 " Use <nowait> to override the default bindings which wait for another key press
@@ -86,6 +133,7 @@ nmap <leader>ms <plug>(Mac_SearchForNamedMacroAndSelect)
 
 "" Plug 'junegunn/fzf.vim'
 nmap !f :Files<cr>
+nmap #f :GFiles<cr>
 nmap !g :Rg<cr>
 nmap #g :call RgSymbol()<cr>
 nmap !t :Tags<cr>
@@ -219,12 +267,13 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 call plug#end()
 
-"
-" other configs
-"
+
+""""""""""""""""""""""""""""""
+" Other configs
+""""""""""""""""""""""""""""""
 
 " write permision-protected file
-nmap ,ws	:w !sudo tee % > /dev/null
+nmap ,ws  :w !sudo tee % > /dev/null
 
 " tabstop set to 2 or 4
 nmap ,ts2 :set tabstop=2<cr>
@@ -256,4 +305,6 @@ set shiftwidth=0
 set expandtab
 set autoindent
 
+" override defaults to this script
 source ~/.vim/local.vim
+
