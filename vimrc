@@ -41,6 +41,7 @@ Plug 'jacquesbh/vim-showmarks'
 
 
 Plug 'tpope/vim-sensible'
+Plug 'Tarmean/fzf-session.vim'
 Plug 'tpope/vim-obsession'
 
 "" Intellisence & Autocomplete
@@ -55,6 +56,8 @@ let g:AutoPairsShortcutFastWrap='<C-e>'   " turns (|)token into (token)|, can re
 
 "" Plug 'preservim/nerdtree'
 nmap !n :NERDTreeToggle<cr>
+nmap #n :NERDTreeFind<cr>
+
 autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 function s:CloseIfOnlyNerdTreeLeft()
   if exists("t:NERDTreeBufName")
@@ -74,7 +77,6 @@ let g:NERDSpaceDelims = 1
 "" Plug 'liuchengxu/vista.vim'
 nmap !b :TagbarToggle<CR>
 let s:vista_toggled = 0
-let g:vista#renderer#ctags = "line"
 " let g:vista_sidebar_position = "vertical topleft"
 nmap !v :call ToggleVistaShow()<CR>   " TODO: errors out someitmes on Vista coc
 nmap #v :call ToggleVistaExec()<CR>
@@ -134,20 +136,56 @@ nmap <leader>ms <plug>(Mac_SearchForNamedMacroAndSelect)
 "" Plug 'junegunn/fzf.vim'
 nmap !f :Files<cr>
 nmap #f :GFiles<cr>
-nmap !g :Rg<cr>
-nmap #g :call RgSymbol()<cr>
 nmap !t :Tags<cr>
+nmap !g :Rg<cr>
+nmap #g :call PreservedHyphenWordYankExec("Rg")<cr>
+nmap !l :BLines<cr>
+nmap !L :BLinesNoSort<cr>
+nmap #l :call PreservedHyphenWordYankExec("BLines '")<cr>
+nmap #L :call PreservedHyphenWordYankExec("BLinesNoSort '")<cr>
 
-function RgSymbol()
+command! -bang -nargs=* BLines
+    \ call fzf#vim#grep(
+    \   'rg --with-filename --column --line-number --no-heading --smart-case . '.fnameescape(expand('%:p')), 1,
+    \   fzf#vim#with_preview({'options': '--layout reverse --query '.shellescape(<q-args>).' --with-nth=4.. --delimiter=":"'}, 'right:50%'))
+
+
+" \   fzf#vim#with_preview({'options': '--layout reverse  --with-nth=-1.. --delimiter="/"'}, 'right:50%'))
+
+command! -bang -nargs=* BLinesNoSort
+    \ call fzf#vim#grep(
+    \   'rg --with-filename --column --line-number --no-heading --smart-case . '.fnameescape(expand('%:p')), 1,
+    \   fzf#vim#with_preview({'options': '--layout reverse --query '.shellescape(<q-args>).' --no-sort --with-nth=4.. --delimiter=":"'}, 'right:50%'))
+
+function PreservedHyphenWordYankExec(command)
+  " calls a:command with yiw at this cursor that includes
+  " hyphens. The yank is preserved and does not affect
+  " the user's registers
   let save_cb = &cb
-  let regInfo = getreginfo('"')
+  let l:register = '"'
+  let reginfo = getreginfo(l:register)
   try
-    " norm! y{motion}
-    norm! yiw:Rg "
-  finally
-    let &cb = save_cb
-    call setreg('"', regInfo)
+    call YankWordWithHyphen()
+    let l:cmd = ":" . a:command . " " . getreg('"')
+    echo l:cmd
+    exec l:cmd
+    call setreg(l:register, reginfo)
   endtry
+endfunction
+
+function YankWordWithHyphen()
+    " include hyphens as word symbol temporarily
+    let l:includes_hyphen=stridx(&iskeyword, ',-')
+    if l:includes_hyphen == -1
+      set iskeyword+=-
+    endif
+
+    norm! yiw
+
+    " restore iskeyword
+    if l:includes_hyphen == -1
+      set iskeyword-=-
+    endif
 endfunction
 
 " Plug 'antoinemadec/coc-fzf'
@@ -158,6 +196,7 @@ nmap !d :CocFzfList diagnostics<cr>
 "" Plug 'neoclide/coc.nvim'
 " remap <C-i> which is taken by tab for completion
 nnoremap <C-p> <C-i>
+nnoremap <leader>o <C-i>
 "
 " if hidden is not set, TextEdit might fail.
 set hidden
@@ -265,6 +304,8 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
+nmap <leader>fc :CocFzfList<CR>
+
 call plug#end()
 
 
@@ -278,6 +319,11 @@ nmap ,ws  :w !sudo tee % > /dev/null
 " tabstop set to 2 or 4
 nmap ,ts2 :set tabstop=2<cr>
 nmap ,ts4 :set tabstop=4<cr>
+
+" Hex read
+nmap <Leader>hr :%!xxd<CR> :set filetype=xxd<CR>
+" Hex write
+nmap <Leader>hw :%!xxd -r<CR> :set binary<CR> :set filetype=<CR>
 
 " map scrolling
 map <silent> <C-j> <C-e>
@@ -306,5 +352,5 @@ set expandtab
 set autoindent
 
 " override defaults to this script
-source ~/.vim/local.vim
+source ~/.vimrc.local
 
