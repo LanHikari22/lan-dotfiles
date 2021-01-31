@@ -138,7 +138,7 @@ nmap !f :Files<cr>
 nmap #f :GFiles<cr>
 nmap !t :Tags<cr>
 nmap !g :Rg<cr>
-nmap #g :call PreservedHyphenWordYankExec("Rg")<cr>
+nmap #g :call PreservedHyphenWordYankExec("Rg ")<cr>
 nmap !l :BLines<cr>
 nmap !L :BLinesNoSort<cr>
 nmap #l :call PreservedHyphenWordYankExec("BLines '")<cr>
@@ -166,7 +166,7 @@ function PreservedHyphenWordYankExec(command)
   let reginfo = getreginfo(l:register)
   try
     call YankWordWithHyphen()
-    let l:cmd = ":" . a:command . " " . getreg('"')
+    let l:cmd = ":" . a:command . getreg('"')
     echo l:cmd
     exec l:cmd
     call setreg(l:register, reginfo)
