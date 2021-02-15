@@ -21,8 +21,15 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'jiangmiao/auto-pairs'                         " see config below
 Plug 'preservim/nerdcommenter'                      " see config below
 Plug 'yggdroot/indentLine'
+  " visualizes indent lines
 Plug 'svermeulen/vim-macrobatics'                   " see config below 
-Plug 'chrisbra/Recover.vim'
+  " enhanced macro operation
+Plug 'tpope/vim-surround'                           " see config below
+  " surround parentheses, brackets, quotes, XML tags, and more.
+Plug 'justinmk/vim-sneak'                           " see config below
+  " 's' to jump to any location specified by two characters
+Plug 'chrisbra/Recover.vim'                         
+  " Recover.vim adds a diff option when Vim finds a swap file
  
 "" Navigation
 Plug 'preservim/nerdtree'                           " see config below
@@ -73,6 +80,22 @@ endfunction
 nmap <C-_>  <Plug>NERDCommenterToggle
 vmap <C-_>  <Plug>NERDCommenterToggle<CR>gv
 let g:NERDSpaceDelims = 1
+
+"" Plug 'justinmk/vim-sneak'
+xmap <S-s> <Plug>Sneak_S
+omap s <Plug>Sneak_s
+omap S <Plug>Sneak_S
+
+"" Plug 'tpope/vim-surround'
+" move VSurround to z to make vim-sneak consistent in operator mode
+xmap z <Plug>VSurround
+let g:surround_no_mappings= 1
+xmap z <Plug>VSurround
+nmap yzz <Plug>Yssurround
+nmap yz  <Plug>Ysurround
+nmap dz  <Plug>Dsurround
+nmap cz  <Plug>Csurround
+
 
 "" Plug 'liuchengxu/vista.vim'
 nmap !b :TagbarToggle<CR>
