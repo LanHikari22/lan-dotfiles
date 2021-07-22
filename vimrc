@@ -161,10 +161,10 @@ nmap <leader>ms <plug>(Mac_SearchForNamedMacroAndSelect)
 nmap !f :Files<cr>
 nmap #f :GFiles<cr>
 nmap !t :Tags<cr>
-nmap !g :Rg<cr>
+nmap !g :call SaveToJumplistIfOK("Rg")<cr>
 nmap #g :call PreservedHyphenWordYankExec("Rg ")<cr>
-nmap !l :BLines<cr>
-nmap !L :BLinesNoSort<cr>
+nmap !l :call SaveToJumplistIfOK("BLines")<cr>
+nmap !L :call SaveToJumplistIfOK("BLinesNoSort")<cr>
 nmap #l :call PreservedHyphenWordYankExec("BLines '")<cr>
 nmap #L :call PreservedHyphenWordYankExec("BLinesNoSort '")<cr>
 
@@ -174,6 +174,8 @@ command! -bang -nargs=* BLines
     \ call fzf#vim#grep(
     \   'rg --with-filename --column --line-number --no-heading --smart-case . '.fnameescape(expand('%:p')), 1,
     \   fzf#vim#with_preview({'options': '--layout reverse --query '.shellescape(<q-args>).' --with-nth=4.. --delimiter=":"'}, 'down:60%'))
+
+
 " \   fzf#vim#with_preview({'options': '--layout reverse  --with-nth=-1.. --delimiter="/"'}, 'right:50%'))
 
 command! -bang -nargs=* BLinesNoSort
@@ -185,15 +187,19 @@ function PreservedHyphenWordYankExec(command)
   " calls a:command with yiw at this cursor that includes
   " hyphens. The yank is preserved and does not affect
   " the user's registers
+
+  " save this location to the jumplist first. see :jumps
+  normal! m`
+
   let save_cb = &cb
   let l:register = '"'
-  let reginfo = getreginfo(l:register)
+  " let reginfo = getreginfo(l:register)
   try
     call YankWordWithHyphen()
     let l:cmd = ":" . a:command . getreg('"')
-    echo l:cmd
     exec l:cmd
-    call setreg(l:register, reginfo)
+    " call setreg(l:register, reginfo)
+    call ConsumeSaveToJumplistOnError()
   endtry
 endfunction
 
@@ -211,6 +217,28 @@ function YankWordWithHyphen()
       set iskeyword-=-
     endif
 endfunction
+
+function SaveToJumplistIfOK(command)
+  " save this location to the jumplist first. see :jumps
+  normal! m`
+
+  try
+    let l:cmd = ":" . a:command
+    exec l:cmd
+  endtry
+
+  call ConsumeSaveToJumplistOnError()
+endfunction
+
+function ConsumeSaveToJumplistOnError()
+  if v:shell_error != 0
+    " we canceled the command or something went wrong, undo addition to
+    " jumplist. This still would cause the jump history past current point to
+    " be deleted
+    normal! 
+    endif
+endfunction
+
 
 " Plug 'antoinemadec/coc-fzf'
 nmap !o :CocFzfList outline<cr>
