@@ -1,0 +1,15 @@
+// Legend: 
+// () Module
+//    (-) Task to complete
+//    (!) Task completed
+
+() vim
+  (-) Improvements to buffer grep
+    (-) Updated #L Buffer grep to be able to deselect preview
+
+() setup
+
+() documentation
+  (-) README: Improve installation process
+
+() tools

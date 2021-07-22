@@ -51,8 +51,9 @@ Plug 'tpope/vim-sensible'
 Plug 'Tarmean/fzf-session.vim'
 Plug 'tpope/vim-obsession'
 
-"" Intellisence & Autocomplete
+"" Intellisence & Autocomplete & Syntax Highlighting
 Plug 'neoclide/coc.nvim', {'branch': 'release'}     " see config below
+Plug 'tikhomirov/vim-glsl'
 
 """"""""""""""""""""""""""""""
 " plugin config
@@ -167,18 +168,18 @@ nmap !L :BLinesNoSort<cr>
 nmap #l :call PreservedHyphenWordYankExec("BLines '")<cr>
 nmap #L :call PreservedHyphenWordYankExec("BLinesNoSort '")<cr>
 
+let g:fzf_preview_window = ['down:60%', 'ctrl-/']
+
 command! -bang -nargs=* BLines
     \ call fzf#vim#grep(
     \   'rg --with-filename --column --line-number --no-heading --smart-case . '.fnameescape(expand('%:p')), 1,
-    \   fzf#vim#with_preview({'options': '--layout reverse --query '.shellescape(<q-args>).' --with-nth=4.. --delimiter=":"'}, 'right:50%'))
-
-
+    \   fzf#vim#with_preview({'options': '--layout reverse --query '.shellescape(<q-args>).' --with-nth=4.. --delimiter=":"'}, 'down:60%'))
 " \   fzf#vim#with_preview({'options': '--layout reverse  --with-nth=-1.. --delimiter="/"'}, 'right:50%'))
 
 command! -bang -nargs=* BLinesNoSort
     \ call fzf#vim#grep(
     \   'rg --with-filename --column --line-number --no-heading --smart-case . '.fnameescape(expand('%:p')), 1,
-    \   fzf#vim#with_preview({'options': '--layout reverse --query '.shellescape(<q-args>).' --no-sort --with-nth=4.. --delimiter=":"'}, 'right:50%'))
+    \   fzf#vim#with_preview({'options': '--layout reverse --query '.shellescape(<q-args>).' --no-sort --with-nth=4.. --delimiter=":"'}, 'down:60%'))
 
 function PreservedHyphenWordYankExec(command)
   " calls a:command with yiw at this cursor that includes
@@ -354,6 +355,20 @@ map <silent> <C-k> <C-y>
 
 "" Etcnnmap <silent> <C-p> <C-i>
 map <silent> <C-p> <C-i>
+
+"" capslock only in insert mode with CTRL+^
+" Execute 'lnoremap x X' and 'lnoremap X x' for each letter a-z.
+for c in range(char2nr('A'), char2nr('Z'))
+  execute 'lnoremap ' . nr2char(c+32) . ' ' . nr2char(c)
+  execute 'lnoremap ' . nr2char(c) . ' ' . nr2char(c+32)
+endfor
+" Kill the capslock when leaving insert mode.
+autocmd InsertLeave * set iminsert=0
+
+" toggle default caps/no caps
+let g:capslocktoggle = 0
+nnoremap ,cap :let g:capslocktoggle = !g:capslocktoggle<CR>
+autocmd InsertEnter * if g:capslocktoggle | set iminsert=1 | endif
 
 colo gruvbox
 let g:gruvbox_contrast_dark="hard"
