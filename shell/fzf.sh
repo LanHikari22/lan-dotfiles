@@ -21,9 +21,18 @@ fda() {
   [ $? != 0 ] && cd $init_dir
 }
 
+# fhp - print command from history
+fhp() {
+  comm="$( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed -E 's/ *[0-9]*\*? *//' | sed -E 's/\\/\\\\/g')"
+  echo $comm
+}
+
+
 # fh - repeat history
 fh() {
-  eval $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed -E 's/ *[0-9]*\*? *//' | sed -E 's/\\/\\\\/g')
+  comm="$(fhp)"
+  echo "$" $comm
+  eval "$comm"
 }
 
 # fkill - kill processes - list only the ones you can kill. Modified the earlier script.
