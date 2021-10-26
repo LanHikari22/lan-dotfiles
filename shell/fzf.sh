@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# settings
+# set this to 1 to also copy the command to tmux buffer (default=0)
+FHP_COPY_TO_TMUX_BUFFER=0
+
 # fd - cd to selected directory from specified directory
 fd() {
   local dir
@@ -21,10 +25,14 @@ fda() {
   [ $? != 0 ] && cd $init_dir
 }
 
+
 # fhp - print command from history
 fhp() {
   comm="$( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed -E 's/ *[0-9]*\*? *//' | sed -E 's/\\/\\\\/g')"
   echo $comm
+  if [[ $FHP_COPY_TO_TMUX_BUFFER != 0 ]]; then
+    echo $comm | tr --d '\n' | tmux loadb -
+  fi
 }
 
 
