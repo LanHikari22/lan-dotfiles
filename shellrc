@@ -11,7 +11,7 @@ source_if_found ~/.config/shell/fzf.sh
 alias diff="diff -Naur --color=always"
 alias lsd="ls -d */"
 alias spring-run='mvn package && java -jar target/*.jar'
-alias tma='tmux attach -t base || tmux new -t base'
+alias tma='tmux attach -t main || tmux new -s main'
 alias vi='/usr/bin/vim'
 alias ipext='curl ipinfo.io/ip'
 
