@@ -17,5 +17,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 touch ~/.vimrc.local
 
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
-nvm install node
+# manual:
+# Then in a new terminal run
+# nvm install node
 
