@@ -13,3 +13,5 @@ shell/fzf.sh: ~/.config/shell/fzf.sh
 tmux.conf: ~/.tmux.conf
 kitty.conf: ~/.config/kitty/kitty.conf
 elinks.conf: ~/.elinks/elinks.conf
+
+robbyrussell-cust.zsh-theme: ~/.oh-my-zsh/themes/robbyrussell-cust.zsh-theme
