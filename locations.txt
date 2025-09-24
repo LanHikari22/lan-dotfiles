@@ -1,17 +1,21 @@
 // specifies where to place each conf file and is used by push.py and pull.py
 
 // vim
-vimrc: ~/.vimrc
-vim/coc-settings.json: ~/.vim/coc-settings.json
+services/vim/.vimrc: ~/.vimrc
+services/vim/coc-settings.json: ~/.vim/coc-settings.json
 
 // shell
-shellrc: ~/.shellrc
-shell/emojis.sh: ~/.config/shell/emojis.sh
-shell/display.sh: ~/.config/shell/display.sh
-shell/fzf.sh: ~/.config/shell/fzf.sh
+services/shell/shellrc: ~/.shellrc
+services/shell/shell/emojis.sh: ~/.config/shell/emojis.sh
+services/shell/shell/display.sh: ~/.config/shell/display.sh
+services/shell/shell/fzf.sh: ~/.config/shell/fzf.sh
 
-tmux.conf: ~/.tmux.conf
-kitty.conf: ~/.config/kitty/kitty.conf
-elinks.conf: ~/.elinks/elinks.conf
+services/tmux/.tmux.conf: ~/.tmux.conf
 
-robbyrussell-cust.zsh-theme: ~/.oh-my-zsh/themes/robbyrussell-cust.zsh-theme
+services/kitty/kitty.conf: ~/.config/kitty/kitty.conf
+
+services/elinks/elinks.conf: ~/.elinks/elinks.conf
+
+services/omz/robbyrussell-cust.zsh-theme: ~/.oh-my-zsh/themes/robbyrussell-cust.zsh-theme
+
+services/zsh/.zshrc: ~/.zshrc

@@ -13,7 +13,7 @@ Plug 'preservim/nerdtree'                           " see config below
 Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
 Plug 'junegunn/fzf.vim'                              " see config below
 Plug 'chrisbra/Recover.vim'                         
-Plug 'yggdroot/indentLine'
+"Plug 'yggdroot/indentLine'
   " visualizes indent lines
 Plug 'justinmk/vim-sneak'                           " see config below
   " 's' to jump to any location specified by two characters
@@ -209,7 +209,7 @@ call plug#end()
 " Other configs
 """"""""""""""""""""""""""""""
 
-set nu rnu
+"set nu rnu
 
 set foldmethod=indent
 set nofoldenable
